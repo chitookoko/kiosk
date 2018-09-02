@@ -4,6 +4,9 @@
 # runs as root
 #
 
+export HOME=/root
+echo "home is $HOME"
+
 apt-get update
 apt-get install unzip -y
 
@@ -27,4 +30,10 @@ echo "export PATH=\$GOPATH/bin:/usr/local/go/bin:/usr/local/protobuf/bin:\$PATH"
 source /root/.profile
 echo $PATH
 
-go get github.com/googleapis/kiosk
+go get -d github.com/googleapis/kiosk
+cd /root/go/src/github.com/googleapis/kiosk
+sh RUNME.sh
+go get github.com/googleapis/kiosk/server
+go get github.com/googleapis/kiosk/k
+
+echo "Done!"
