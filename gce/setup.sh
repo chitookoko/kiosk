@@ -14,11 +14,22 @@ gcloud compute --project=kiosk-api \
 	--maintenance-policy=MIGRATE \
 	--service-account=839937343109-compute@developer.gserviceaccount.com \
 	--scopes=https://www.googleapis.com/auth/cloud-platform \
+	--tags=http-server \
 	--image=ubuntu-1604-lts-drawfork-v20180810 \
 	--image-project=eip-images \
 	--boot-disk-size=10GB \
 	--boot-disk-type=pd-standard
 	
+gcloud compute --project=kiosk-api \
+	firewall-rules create default-allow-http \
+	--direction=INGRESS \
+	--priority=1000 \
+	--network=default \
+	--action=ALLOW \
+	--rules=tcp:8080 \
+	--source-ranges=0.0.0.0/0 \
+	--target-tags=http-server
+
 #--machine-type=f1-micro \
 	
 # gcloud compute instances delete kiosk-2
